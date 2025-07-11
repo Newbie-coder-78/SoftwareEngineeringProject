@@ -53,3 +53,45 @@ window.addEventListener('DOMContentLoaded', () => {
     html.setAttribute('data-theme', savedTheme);
     updateToggleText(savedTheme);
 });
+
+//Character sets
+const charSets = {
+    uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    lowercase: "abcdefghijklmnopqrstuvwxyz",
+    numbers: "0123456789",
+    symbols: "!@#$%^&*()_+~`|}{[]\\:;?><,./-="
+};
+
+//Generate Password
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const length = parseInt(document.getElementById('length').value);
+    const includeUpper = document.getElementById('uppercase').checked;
+    const includeLower = document.getElementById('lowercase').checked;
+    const includeNumbers = document.getElementById('numbers').checked;
+    const includeSymbols = document.getElementById('symbols').checked;
+
+    let validChars = '';
+    if (includeUpper) validChars += charSets.uppercase;
+    if (includeLower) validChars += charSets.lowercase;
+    if (includeNumbers) validChars += charSets.numbers;
+    if (includeSymbols) validChars += charSets.symbols;
+
+    if (!validChars) {
+        passwordField.value = '';
+        strengthBar.style.backgroundColor = "var(--border-color)";
+        warning.textContent = "❌ Select at least one character type.";
+        return;
+    }
+
+    let password = '';
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * validChars.length);
+        password += validChars[randomIndex];
+    }
+
+    passwordField.value = password;
+    warning.textContent = "";
+    evaluateStrength(password);
+});
