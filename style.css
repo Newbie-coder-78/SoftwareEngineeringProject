@@ -43,9 +43,12 @@ header {
     align-items: center;
     color: var(--text-color);
     padding: 1.5rem 2rem;
+<<<<<<< HEAD
     border-bottom: 1px;
     border-radius: 12px;
     margin-bottom: 1.5rem;
+=======
+>>>>>>> 7561c04aed679b8fb69d07cbe0fd66e0725135e3
 }
 
 .logo {
@@ -53,6 +56,7 @@ header {
     font-weight: 600;
 }
 
+<<<<<<< HEAD
 .user-info {
     display: flex;
     flex-direction: column;
@@ -75,6 +79,8 @@ header {
     box-shadow: var(--button-glow);
 }
 
+=======
+>>>>>>> 7561c04aed679b8fb69d07cbe0fd66e0725135e3
 .theme-btn {
     background-color: var(--accent-color);
     border: none;
@@ -173,7 +179,10 @@ input[type="checkbox"] {
     margin-top: 2rem;
     display: flex;
     gap: 0.5rem;
+<<<<<<< HEAD
     margin-bottom: 2rem;
+=======
+>>>>>>> 7561c04aed679b8fb69d07cbe0fd66e0725135e3
 }
 
 #generated-password {
@@ -208,6 +217,7 @@ input[type="checkbox"] {
     margin-top: 0.5rem;
 }
 
+<<<<<<< HEAD
 /* HISTORY */
 .history-section {
     margin-top: 2rem;
@@ -233,10 +243,16 @@ input[type="checkbox"] {
     border-bottom: none;
 }
 
+=======
+>>>>>>> 7561c04aed679b8fb69d07cbe0fd66e0725135e3
 /* FOOTER */
 footer {
     text-align: center;
     padding: 1.5rem;
     font-size: 0.85rem;
     color: var(--text-color);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 7561c04aed679b8fb69d07cbe0fd66e0725135e3

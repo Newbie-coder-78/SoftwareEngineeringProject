@@ -126,4 +126,8 @@ copyBtn.addEventListener('click', () => {
             copyBtn.textContent = "Copy";
         }, 1500);
     });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 7561c04aed679b8fb69d07cbe0fd66e0725135e3
