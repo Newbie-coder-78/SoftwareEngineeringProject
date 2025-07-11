@@ -56,9 +56,7 @@ describe('Password Generator UI Tests', () => {
     expect(generateBtn.disabled).toBe(true);
     expect(warningMsg.textContent).toContain('at least 8 characters');
   });
-
-});
-
+  
  //Test 2: Warning for no character types selected
   test('shows warning if no character types are selected', () => {
     loadScript();
@@ -76,3 +74,5 @@ describe('Password Generator UI Tests', () => {
     expect(passwordField.value).toBe('');
     expect(warningMsg.textContent).toContain('Select at least one character type');
   });
+  
+});
