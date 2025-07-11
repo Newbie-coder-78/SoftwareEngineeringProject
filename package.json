@@ -1,3 +1,16 @@
-"scripts": {
-  "test": "jest"
+{
+  "name": "password-generator",
+  "version": "1.0.0",
+  "description": "A password generator web app with unit testing using Jest",
+  "main": "script.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "jest-environment-jsdom": "^30.0.4"
+  }
 }
