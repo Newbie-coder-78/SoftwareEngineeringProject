@@ -75,33 +75,43 @@ describe('Password Generator UI Tests', () => {
     expect(warningMsg.textContent).toContain('Select at least one character type');
   });
 
-//Test 4: jest tests for when password includes symbols and when it does not.
-const generatePassword = require('./generatePassword');
+  //Test 3: Generating password
+  test('generates a password when valid options selected', () => {
+    loadScript();
+    lengthInput.value = '12';
+    lengthInput.dispatchEvent(new Event('input'));
 
-const symbols = "!@#$%^&*()_+~`|}{[]\\:;?><,./-=";
+    uppercase.checked = true;
+    lowercase.checked = true;
+    numbers.checked = true;
+    symbols.checked = true;
 
-test('password includes symbols when includeSymbols is true', () => {
-  const password = generatePassword(50, {
-    includeUpper: false,
-    includeLower: false,
-    includeNumbers: false,
-    includeSymbols: true,
+    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+
+    const generated = passwordField.value;
+    expect(generated.length).toBe(12);
+    expect(warningMsg.textContent).toBe('');
   });
-  const hasSymbol = symbols.split('').some(s => password.includes(s));
-  expect(hasSymbol).toBe(true);
-});
 
-test('password does NOT include symbols when includeSymbols is false', () => {
-  const password = generatePassword(50, {
-    includeUpper: true,
-    includeLower: true,
-    includeNumbers: true,
-    includeSymbols: false,
+  //Test 4: Random password generation
+  test('generates different passwords in a row with same settings', () => {
+    loadScript();
+    lengthInput.value = '12';
+    lengthInput.dispatchEvent(new Event('input'));
+
+    uppercase.checked = true;
+    lowercase.checked = true;
+    numbers.checked = true;
+    symbols.checked = true;
+
+    const passwords = new Set();
+
+    for (let i = 0; i < 5; i++) {
+      form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+      passwords.add(passwordField.value);
+    }
+
+    expect(passwords.size).toBeGreaterThan(1);
   });
-  const hasSymbol = symbols.split('').some(s => password.includes(s));
-  expect(hasSymbol).toBe(false);
-});
 
 });
-
-
