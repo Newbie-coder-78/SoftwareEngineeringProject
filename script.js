@@ -114,3 +114,16 @@ function evaluateStrength(password) {
     strengthBar.style.backgroundColor = colors[Math.min(strength -1, 4)];
     strengthBar.style.width = `${(strength / 5) * 100}%`
 }
+
+//Copy to clipboard
+copyBtn.addEventListener('click', () => {
+    const password = passwordField.value;
+    if (!password || password.includes("❌")) return;
+
+    navigator.clipboard.writeText(password).then(() => {
+        copyBtn.textContent = "Copied!";
+        setTimeout(() => {
+            copyBtn.textContent = "Copy";
+        }, 1500);
+    });
+});
