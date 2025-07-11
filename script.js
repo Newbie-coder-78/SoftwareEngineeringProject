@@ -95,3 +95,22 @@ form.addEventListener('submit', (e) => {
     warning.textContent = "";
     evaluateStrength(password);
 });
+
+//Strength evaluation
+function evaluateStrength(password) {
+    const length = password.length;
+    let strength = 0;
+
+    if (/[a-z]/.test(password)) strength++;
+    if (/[A-Z]/.test(password)) strength++;
+    if (/[0-9]/.test(password)) strength++;
+    if (/[^A-Za-z0-9]/.test(password)) strength++;
+    if (length >= 12) {
+        strength++;
+    }
+
+    //Update strength bar color
+    const colors = ["#ff4d4d", "#ffa94d", "#ffe94d", "#a0e34d", "#4de06e"];
+    strengthBar.style.backgroundColor = colors[Math.min(strength -1, 4)];
+    strengthBar.style.width = `${(strength / 5) * 100}%`
+}
