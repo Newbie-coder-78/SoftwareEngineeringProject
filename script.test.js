@@ -76,3 +76,32 @@ describe('Password Generator UI Tests', () => {
   });
   
 });
+
+//Test 4: jest tests for when password includes sysbols and when it doe not.
+const generatePassword = require('./generatePassword');
+
+const symbols = "!@#$%^&*()_+~`|}{[]\\:;?><,./-=";
+
+test('password includes symbols when includeSymbols is true', () => {
+  const password = generatePassword(50, {
+    includeUpper: false,
+    includeLower: false,
+    includeNumbers: false,
+    includeSymbols: true,
+  });
+  const hasSymbol = symbols.split('').some(s => password.includes(s));
+  expect(hasSymbol).toBe(true);
+});
+
+test('password does NOT include symbols when includeSymbols is false', () => {
+  const password = generatePassword(50, {
+    includeUpper: true,
+    includeLower: true,
+    includeNumbers: true,
+    includeSymbols: false,
+  });
+  const hasSymbol = symbols.split('').some(s => password.includes(s));
+  expect(hasSymbol).toBe(false);
+});
+
+
