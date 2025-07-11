@@ -58,3 +58,21 @@ describe('Password Generator UI Tests', () => {
   });
 
 });
+
+ //Test 2: Warning for no character types selected
+  test('shows warning if no character types are selected', () => {
+    loadScript();
+    lengthInput.value = '12';
+    lengthInput.dispatchEvent(new Event('input'));
+
+    //Unchecking all boxes
+    uppercase.checked = false;
+    lowercase.checked = false;
+    numbers.checked = false;
+    symbols.checked = false;
+
+    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+
+    expect(passwordField.value).toBe('');
+    expect(warningMsg.textContent).toContain('Select at least one character type');
+  });
