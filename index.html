@@ -1,6 +1,5 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,16 +13,49 @@
             <div class="logo">
                 🔐 SyntaxSociety
             </div>
-            <!-- LOGIN/USER INFO -->
-            <div style="display: flex; align-items: center; gap: 1.5rem;">
-                <div class="user-info">
-                    <span id="welcome-msg">Welcome, User</span>
-                </div>
+            <!-- LOGIN/REGISTER -->
+            <div class="auth-section">
+                <button id="auth-toggle" class="auth-btn">Register/Login</button>
+                <button id="logout-toggle" class="logout-btn hidden">Logout</button>
             </div>
-            <!-- THEME TOGGLE BUTTON -->
-            <button id="theme-toggle" class="theme-btn">Switch to Dark Mode</button>
         </header>
 
+        <!-- MODAL FOR REGISTRATION/LOGIN -->
+        <div id="auth-modal" class="modal hidden">
+            <div class="modal-content">
+                <span id="close-modal" class="close-btn">&times;</span>
+
+                <!-- CHOOSE ACTION -->
+                 <div id="auth-options" class="auth-options">
+                    <h2>Welcome to SyntaxSociety</h2>
+                    <button id="show-login" class="auth-choice-btn">Sign In</button>
+                    <button id="show-register" class="auth-choice-btn">Create Account</button>
+                 </div>
+
+                <!-- LOGIN -->
+                <div id="login-section" class="hidden">
+                    <h2>Welcome back!</h2>
+                    <form id="login-form" class="modal-form">
+                        <input type="email" id="email" placeholder="Email" required>
+                        <input type="password" id="login-password" placeholder="Password" required>
+                        <button type="submit">Sign In</button>
+                        <div id="login-error" class="warning-msg"></div>
+                    </form>
+                </div>
+
+                 <!-- REGISTER -->
+                <div id="register-section" class="hidden">
+                    <h2>Welcome!</h2>
+                    <form id="register-form" class="modal-form">
+                        <input type="email" id="register-email" placeholder="Email" required>
+                        <input type="password" id="register-password" placeholder="Password" required>
+                        <button type="submit">Create Account</button>
+                        <div id="register-error" class="warning-msg"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
         <!-- USER INPUT BOX -->
         <main class="container">
             <h1>Generate a Secure Password</h1>
@@ -62,75 +94,14 @@
             </div>
 
             <!-- HISTORY -->
-             <section class="history-section">
-                <h3>Last 3 Passwords</h3>
-                <ul id="password-history"></ul>
-             </section>
-        </main>
-
-        <!-- FOOTER -->
-        <footer>
-            <p>&copy; 2025 SyntaxSociety. All rights reserved.</p>
-        </footer>
-
-        <script src="script.js"></script>
-    </body>
-</html>
-=======
-<!DOCTYPE html>
-<html lang="en" data-theme="light">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Password Generator</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-
-        <!-- HEADER -->
-        <header>
-            <div class="logo">
-                🔐 SyntaxSociety
+            <div class="history-section">
+                <h2>Last 3 Generated Passwords</h2>
+                <ul id="history-list">Login in to view password history</ul>
             </div>
+
             <!-- THEME TOGGLE BUTTON -->
-            <button id="theme-toggle" class="theme-btn">Switch to Dark Mode</button>
-        </header>
-
-        <!-- USER INPUT BOX -->
-        <main class="container">
-            <h1>Generate a Secure Password</h1>
-
-            <form id="password-form">
-                <div class="form-group">
-                    <label for="length">Password Length:</label>
-                    <input type="number" id="length" name="length" min= "1" max="64" value="12">
-                </div>
-
-                <!-- CHECKBOXES -->
-                <div class="form-group checkbox-group">
-                    <label><input type="checkbox" id="uppercase"> Include Uppercase (A-Z)</label>
-                    <label><input type="checkbox" id="lowercase"> Include Lowercase (a-z)</label>
-                    <label><input type="checkbox" id="numbers"> Include Numbers (0-9)</label>
-                    <label><input type="checkbox" id="symbols"> Include Symbols (!@#$...)</label>
-                </div>
-
-                <!-- GENERATE BUTTON -->
-                <button type="submit" class="generate-btn" id="generate-btn">Generate Password</button>
-            </form>
-
-            <!-- WARNING MESSAGE -->
-            <div id="warning-msg" class="warning-msg"></div>
-
-            <!-- RESULT BOX -->
-            <div id="result-box" class="result-box">
-                <input type="text" id="generated-password" readonly placeholder="Your password will appear here">
-                <button id="copy-btn" class="copy-btn">🗐 Copy</button>
-            </div>
-
-            <!-- STRENGTH METER -->
-            <div class="stength-meter">
-                <label>Password Strength</label>
-                <div id="strength-btn" class="bar"></div>
+            <div class="theme-toggle">
+                <button id="theme-toggle" class="theme-btn">Switch to Dark Mode</button>
             </div>
         </main>
 
@@ -142,4 +113,3 @@
         <script src="script.js"></script>
     </body>
 </html>
->>>>>>> 7561c04aed679b8fb69d07cbe0fd66e0725135e3
