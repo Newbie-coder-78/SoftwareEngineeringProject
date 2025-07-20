@@ -9,6 +9,12 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "bcrypt": "^5.1.0",
+    "mysql2": "^3.9.1"
+  },
   "devDependencies": {
     "jest": "^29.0.0",
     "jest-environment-jsdom": "^30.0.4"
