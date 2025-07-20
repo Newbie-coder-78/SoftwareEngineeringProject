@@ -1,6 +1,4 @@
-/* ===== Light and Dark Themes ===== */
-
-/* GENERAL BODY AND BACKGROUND */
+/* THEME VARIABLES */
 :root {
     --bg-color: #f4f4f4;
     --text-color: #1e1e1e;
@@ -23,6 +21,7 @@
     --button-glow: 0 0 10px rgba(144, 202, 249, 0.5);
 }
 
+/* GENERAL BODY AND BACKGROUND */
 * {
     box-sizing: border-box;
 }
@@ -43,12 +42,9 @@ header {
     align-items: center;
     color: var(--text-color);
     padding: 1.5rem 2rem;
-<<<<<<< HEAD
     border-bottom: 1px;
     border-radius: 12px;
     margin-bottom: 1.5rem;
-=======
->>>>>>> 7561c04aed679b8fb69d07cbe0fd66e0725135e3
 }
 
 .logo {
@@ -56,31 +52,11 @@ header {
     font-weight: 600;
 }
 
-<<<<<<< HEAD
-.user-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.4rem;
+.theme-toggle {
+    margin-top: 2rem;
+    text-align: center;
 }
 
-.logout-btn {
-    background-color: var(--accent-color);
-    border: none;
-    color: #fff;
-    padding: 0.6rem 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.3s;
-}
-
-.logout-btn:hover {
-    transform: scale(1.05);
-    box-shadow: var(--button-glow);
-}
-
-=======
->>>>>>> 7561c04aed679b8fb69d07cbe0fd66e0725135e3
 .theme-btn {
     background-color: var(--accent-color);
     border: none;
@@ -93,6 +69,142 @@ header {
 
 .theme-btn:hover {
     transform: scale(1.05);
+    box-shadow: var(--button-glow);
+}
+
+/* AUTHENTICATION BUTTON */
+.auth-btn {
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 5;
+}
+
+/* LOGOUT */
+.logout-btn {
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 5;
+}
+
+.logout-btn.hidden {
+    display: none;
+}
+
+/* MODAL BACKDROP */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+/* MODAL CONTENT */
+.modal-content {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    max-width: 500px;
+    position: relative;
+    width: 90%;
+}
+
+/* HIDE MODAL */
+.hidden {
+    display: none;
+}
+
+button {
+    margin: 0.5rem 0;
+}
+
+.auth-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.auth-choice-btn {
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.auth-choice-btn:hover {
+    transform: scale(1.05);
+    box-shadow: var(--button-glow);
+}
+
+.auth-section {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* CLOSE BUTTON */
+.close-btn {
+    position: absolute;
+    top: 0.8rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* MODAL FORM */
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.modal-form input {
+    padding: 0.6rem;
+    font-size: 1rem;
+    border-radius: 10px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.modal-form button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.6rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.modal-form button:hover {
+    transform: scale(1.03);
     box-shadow: var(--button-glow);
 }
 
@@ -179,10 +291,7 @@ input[type="checkbox"] {
     margin-top: 2rem;
     display: flex;
     gap: 0.5rem;
-<<<<<<< HEAD
     margin-bottom: 2rem;
-=======
->>>>>>> 7561c04aed679b8fb69d07cbe0fd66e0725135e3
 }
 
 #generated-password {
@@ -217,7 +326,6 @@ input[type="checkbox"] {
     margin-top: 0.5rem;
 }
 
-<<<<<<< HEAD
 /* HISTORY */
 .history-section {
     margin-top: 2rem;
@@ -243,16 +351,10 @@ input[type="checkbox"] {
     border-bottom: none;
 }
 
-=======
->>>>>>> 7561c04aed679b8fb69d07cbe0fd66e0725135e3
 /* FOOTER */
 footer {
     text-align: center;
     padding: 1.5rem;
     font-size: 0.85rem;
     color: var(--text-color);
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 7561c04aed679b8fb69d07cbe0fd66e0725135e3
