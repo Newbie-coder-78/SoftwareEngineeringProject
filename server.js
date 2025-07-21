@@ -46,6 +46,78 @@ app.post('/api/init-session', async (req, res) => {
     }
 });
 
+//Register
+app.post('/register', async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const [existing] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
+        if (existing.length > 0) {
+            return res.status(409).json({ error: 'Email already exists!' });
+        }
+
+        const hashed = await bcrypt.hash(password, 10);
+
+        //Fetch session theme if available
+        let sessionTheme = 'dark';
+        try {
+            const [sessionRows] = await db.query(
+                'SELECT theme FROM sessions WHERE sessionID = ?', [req.session.sessionID]
+            );
+            if (sessionRows.length > 0) {
+                sessionTheme = sessionRows[0].theme || 'dark';
+            }
+        } catch (err) {
+            console.error('Failed to fetch session theme:', err);
+            return res.status(500).json({ error: 'Failed to fetch session theme.' });
+        }
+        const [result] = await db.query(
+            'INSERT INTO users (email, hashed_password, theme) VALUES (?, ?, ?)', [email, hashed, sessionTheme]
+        );
+
+        req.session.userID = result.insertId;
+
+        await db.query(
+            'UPDATE passwords SET userID = ? WHERE sessionID = ? AND userID IS NULL',
+            [req.session.userID, req.session.sessionID]
+        );
+
+        res.json({ success: true, theme: sessionTheme, message: 'Account created successfully!' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to create account.' });
+    }
+});
+
+//Login
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
+        if (rows.length === 0) {
+            return res.status(401).json({ error: 'User not found!' });
+        }
+
+        const user =rows[0];
+        const valid = await bcrypt.compare(password, user.hashed_password);
+        if (!valid) {
+            return res.status(401).json({ error: 'Invalid password!' });
+        }
+
+        req.session.userID = user.userID;
+
+        //Save session in sessions table
+        await db.query(
+            'UPDATE passwords SET userID = ? WHERE sessionID = ? AND userID IS NULL', [user.userID, req.session.sessionID]
+        );
+
+        res.json({ success: true, theme: user.theme || 'light' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Login failed!' });
+    }
+});
+
 //Add sections here
 
 //Serve Index.html
