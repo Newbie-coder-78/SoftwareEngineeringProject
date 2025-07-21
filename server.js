@@ -118,47 +118,6 @@ app.post('/login', async (req, res) => {
     }
 });
 
-//Add sections here
-
-//Serve Index.html
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-//Start server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port http://localhost:${PORT}`);
-});
-//Login
-app.post('/login', async (req, res) => {
-    const { email, password } = req.body;
-    try {
-        const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
-        if (rows.length === 0) {
-            return res.status(401).json({ error: 'User not found!' });
-        }
-
-        const user =rows[0];
-        const valid = await bcrypt.compare(password, user.hashed_password);
-        if (!valid) {
-            return res.status(401).json({ error: 'Invalid password!' });
-        }
-
-        req.session.userID = user.userID;
-
-        //Save session in sessions table
-        await db.query(
-            'UPDATE passwords SET userID = ? WHERE sessionID = ? AND userID IS NULL', [user.userID, req.session.sessionID]
-        );
-
-        res.json({ success: true, theme: user.theme || 'light' });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Login failed!' });
-    }
-});
-
 //Logout
 app.post('/logout', async (req, res) => {
     if (req.session) {
@@ -200,4 +159,17 @@ app.post('/generate', async (req, res) => {
         console.error(err);
         res.status(500).json({ error: 'Failed to save password' });
     }
+});
+
+//Add sections here
+
+//Serve Index.html
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+//Start server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port http://localhost:${PORT}`);
 });
