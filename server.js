@@ -161,7 +161,49 @@ app.post('/generate', async (req, res) => {
     }
 });
 
-//Add sections here
+//Last 3 passwords
+app.get('/history', async (req, res) => {
+    const userID = req.session.userID;
+    if (!userID) {
+        return res.status(401).json({ error: 'Not logged in' });
+    }
+
+    try {
+        const [rows] = await db.query(`
+            SELECT password, generated_at
+            FROM passwords
+            WHERE userID = ?
+            ORDER BY generated_at DESC
+            LIMIT 3
+        `, [userID]);
+
+        res.json({ success: true, passwords: rows });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to fetch history' });
+    }
+});
+
+//Update theme
+app.post('/theme', async (req, res) => {
+    const userID = req.session.userID;
+    const { theme } = req.body;
+    if (!userID && !req.session.sessionID) {
+        return res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    try {
+        if (userID) {
+            await db.query('UPDATE users SET theme = ? WHERE userID = ?', [theme, userID]);
+        } else {
+            await db.query('UPDATE sessions SET theme = ? WHERE sessionID = ?', [theme, req.session.sessionID]);
+        }
+        res.json({ success: true });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to update theme' });
+    }
+});
 
 //Serve Index.html
 app.get('/', (req, res) => {
